@@ -36,8 +36,8 @@ def signup():
   data["password"] = generate_password_hash(data["password"], method='pbkdf2:sha1', salt_length=8)
   cur.execute('INSERT INTO "user" (email, password) VALUES (%s,%s)', (data["email"],data["password"]))
   token = encode_auth_token(data["email"])
-  response = make_response({"email": result[0], "token": token},200)
-  response.set_cookie("token", token, httponly = True,samesite=None)
+  response = make_response({"email": data["email"]},200)
+  response.set_cookie("token", token, httponly = True, samesite="None",secure=True, max_age=63072000)
   return response
 
 @app.route('/logout')
