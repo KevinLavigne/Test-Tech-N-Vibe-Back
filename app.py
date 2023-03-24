@@ -67,7 +67,7 @@ def velibNear(latitude, longitude):
     print(longitude)
     cur.execute('select latitude, longitude,"Nom de la station" AS stationName, SQRT(POW(69.1 * (latitude - %s), 2) + POW(69.1 * (%s - longitude) * COS(latitude / 57.3), 2)) AS distance FROM velib_pos ORDER BY distance LIMIT 10;', [latitude, longitude])
     tmp = cur.fetchall()
-    
+
 # Extract the column names
     col_names = []
     for elt in cur.description:
